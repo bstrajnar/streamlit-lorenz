@@ -24,7 +24,7 @@ beta  = st.sidebar.slider("β (beta)", 1.0, 5.0, 8/3, 0.1)
 
 dx = st.sidebar.slider(
     "Razlika v začetnem pogoju Δx",
-    0.0, 0.01, 0.001, 0.0001
+    0.0, 0.1, 0.01, 0.01
 )
 
 # ============================================================
@@ -50,7 +50,7 @@ def integrate(x0):
     return np.array(xs), np.array(zs)
 
 x0 = np.array([1.0, 1.0, 1.0])
-x1 = np.array([1.001, 1.0, 1.0])
+x1 = np.array([1.00 + dx, 1.0, 1.0])
 
 xs0, zs0 = integrate(x0)
 xs1, zs1 = integrate(x1)
@@ -107,10 +107,12 @@ fig = go.Figure(
 # LAYOUT WITH PLAY BUTTONS
 # ============================================================
 fig.update_layout(
+    width=900,     # make wider
+    height=700,    # make shorter
     xaxis=dict(title="X", range=[-25, 25]),
     yaxis=dict(title="Z", range=[0, 60]),
     title="Projekcija na ravnino X-Z.",
-    margin=dict(l=0, r=0, t=40, b=0),
+    margin=dict(l=0, r=0, t=50, b=0),
     updatemenus=[
         dict(
             type="buttons",
